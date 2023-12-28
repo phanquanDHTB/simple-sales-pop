@@ -2,6 +2,7 @@ import App from 'koa';
 import createErrorHandler from '@functions/middleware/errorHandler';
 import * as errorService from '@functions/services/errorService';
 import apiRouter from '@functions/routes/api';
+import settingApiRouter from '@functions/routes/settingRoutes.js';
 import render from 'koa-ejs';
 import path from 'path';
 import {verifyEmbedRequest} from '@avada/shopify-auth';
@@ -30,9 +31,11 @@ api.use(createErrorHandler());
 api.use(verifyEmbedRequest(verifyEmbedConfig));
 
 const router = apiRouter(true);
+const settingRouter = settingApiRouter(true);
 // Register all routes for the application
 api.use(router.allowedMethods());
 api.use(router.routes());
+api.use(settingRouter.routes());
 
 // Handling all errors
 api.on('error', errorService.handleError);

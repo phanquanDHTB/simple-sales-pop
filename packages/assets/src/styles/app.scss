@@ -1,7 +1,7 @@
 @import '~@shopify/polaris/build/esm/styles.css';
-@import "colors";
+@import 'colors';
 @import 'scrollbar';
-@import "components";
+@import 'components';
 
 body[data-lock-scrolling] {
   overflow: auto hidden;

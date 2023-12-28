@@ -35,40 +35,23 @@ export default function AppTopBar({isNavOpen, toggleOpenNav}) {
       secondaryMenu={
         <div className="Avada-TopBar__Wrapper">
           <div className="Avada-TopBar__Title">
-            <Button plain onClick={toggleOpenNav}>
-              <Icon source={isNavOpen ? MobileCancelMajor : MobileHamburgerMajor} />
-            </Button>
             <img alt="Avada App Name" src={LOGO_URL} width={LOGO_WIDTH} />
             <DisplayText size="small">
               <Link url="/" removeUnderline>
                 App Name
               </Link>
             </DisplayText>
-            {isLocal && (
-              <Stack alignment="center">
-                <Button plain url="/dev_zone" icon={BugMajor} />
-              </Stack>
-            )}
           </div>
           <div className="Avada-TopBar__Icons">
             <Stack alignment="center" spacing="extraTight">
-              <Button plain url={docLink} external>
+              {/* <Button plain url={docLink} external>
                 <Thumbnail source={InfoIcon} size="small" alt="" />
               </Button>
               <Button plain onClick={() => openNewsSheet()}>
                 <Thumbnail source={NotificationIcon} size="small" alt="" />
-              </Button>
+              </Button> */}
             </Stack>
           </div>
-          {isShopUpgradable(shop) && (
-            <Button url="/subscription">
-              <Stack alignment="center">
-                <Icon source={PaymentsMajor} />
-                <Stack.Item>Subscription</Stack.Item>
-              </Stack>
-            </Button>
-          )}
-          {newsSheet}
         </div>
       }
     />

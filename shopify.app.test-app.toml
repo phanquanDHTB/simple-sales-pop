@@ -1,19 +1,19 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
-name = "avada example app"
-client_id = "5f66c1a9e1447de186a2c4bd21acfc04"
-application_url = "https://re-generates-arrangements-thumbs.trycloudflare.com/auth/shopify"
+name = "test app"
+client_id = "2ac9049cf928bec5946372766744ef70"
+application_url = "https://bookmarks-memphis-revolutionary-even.trycloudflare.com/auth/shopify"
 embedded = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-use_legacy_install_flow = true
+scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://re-generates-arrangements-thumbs.trycloudflare.com/auth/shopify/callback",
-  "https://re-generates-arrangements-thumbs.trycloudflare.com/authSa/shopify/callback",
-  "https://re-generates-arrangements-thumbs.trycloudflare.com/auth/shopify/embed/callback",
+  "https://bookmarks-memphis-revolutionary-even.trycloudflare.com/auth/shopify/callback",
+  "https://bookmarks-memphis-revolutionary-even.trycloudflare.com/authSa/shopify/callback",
+  "https://bookmarks-memphis-revolutionary-even.trycloudflare.com/auth/shopify/embed/callback",
   "https://localhost:3000/auth/shopify/callback",
   "https://localhost:3000/authSa/shopify/callback",
   "https://localhost:3000/auth/shopify/embed/callback"
@@ -26,4 +26,5 @@ api_version = "2023-10"
 embedded = false
 
 [build]
+automatically_update_urls_on_dev = true
 dev_store_url = "avada-training-app.myshopify.com"
