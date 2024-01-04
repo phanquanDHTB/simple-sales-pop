@@ -1,5 +1,6 @@
 import React from 'react';
 import PropsTypes from 'prop-types';
+import {TickSmallMinor} from '@shopify/polaris-icons';
 import './NoticationPopup.scss';
 
 const NotificationPopup = ({
@@ -25,11 +26,11 @@ const NotificationPopup = ({
               <div className={'Avada-SP__Title'}>
                 {firstName} in {city}, {country}
               </div>
-              <div className={'Avada-SP__Subtitle'}>purchased {productName}</div>
+              <div className={'Avada-SP__Subtitle'}>Purchased {productName}</div>
               <div className={'Avada-SP__Footer'}>
-                {timestamp}{' '}
+                {timestamp}
                 <span className="uni-blue">
-                  <i className="fa fa-check" aria-hidden="true" /> by Avada
+                  <TickSmallMinor height={15} width={15} /> by Avada
                 </span>
               </div>
             </div>

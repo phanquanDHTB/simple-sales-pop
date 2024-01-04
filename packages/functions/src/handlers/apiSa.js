@@ -6,6 +6,7 @@ import render from 'koa-ejs';
 import path from 'path';
 import {verifyRequest} from '@avada/shopify-auth';
 import settingApiRouter from '@functions/routes/settingRoutes.js';
+import notificationApiRouter from '@functions/routes/notificationRoutes.js';
 
 // Initialize all demand configuration for an application
 const api = new App();
@@ -26,6 +27,7 @@ const settingRouter = settingApiRouter();
 api.use(router.allowedMethods());
 api.use(router.routes());
 api.use(settingRouter.routes());
+api.use(notificationApiRouter().routes());
 
 // Handling all errors
 api.on('error', errorService.handleError);

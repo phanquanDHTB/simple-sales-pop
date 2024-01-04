@@ -1,6 +1,6 @@
 import App from 'koa';
 import 'isomorphic-fetch';
-import {contentSecurityPolicy, shopifyAuth} from '@avada/shopify-auth';
+import {contentSecurityPolicy, getShopByShopifyDomain, shopifyAuth} from '@avada/shopify-auth';
 import shopifyConfig from '@functions/config/shopify';
 import render from 'koa-ejs';
 import path from 'path';
@@ -43,6 +43,7 @@ app.use(
     },
     hostName: appConfig.baseUrl,
     isEmbeddedApp: true,
+    afterInstall: async ctx => {},
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

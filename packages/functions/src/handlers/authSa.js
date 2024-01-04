@@ -1,12 +1,16 @@
 import App from 'koa';
 import 'isomorphic-fetch';
-import {shopifyAuth} from '@avada/shopify-auth';
+import {getShopByShopifyDomain, shopifyAuth} from '@avada/shopify-auth';
 import shopifyConfig from '@functions/config/shopify';
 import render from 'koa-ejs';
 import path from 'path';
 import createErrorHandler from '@functions/middleware/errorHandler';
 import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
+import {addShopSettings} from '../repositories/settingRepository';
+import {defaultSettings} from '../const/app';
+import syncOrderafterInstall from '../services/syncOrderAfterInstall';
+import {registerWebhook} from '../services/registerWebhook';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -24,7 +28,6 @@ render(app, {
   viewExt: 'html'
 });
 app.use(createErrorHandler());
-
 // Register all routes for the application
 app.use(
   shopifyAuth({
@@ -43,6 +46,23 @@ app.use(
     hostName: appConfig.baseUrl,
     isEmbeddedApp: false,
     prefix: '/authSa',
+    afterInstall: async ctx => {
+      const shopDomain = ctx?.state?.shopify?.shop;
+      try {
+        const {id, accessToken} = await getShopByShopifyDomain(shopDomain);
+        await Promise.all([
+          addShopSettings({...defaultSettings, shopId: id}),
+          syncOrderafterInstall({
+            accessToken,
+            shopId: id,
+            shopDomain
+          }),
+          registerWebhook({shopDomain, accessToken, address: ''})
+        ]);
+      } catch (err) {
+        console.log('xxx', err);
+      }
+    },
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Layout, Page, SettingToggle, TextStyle} from '@shopify/polaris';
-import {api} from '../../helpers';
 
 /**
  * Render a home page for overview
@@ -11,7 +10,7 @@ import {api} from '../../helpers';
 export default function Home() {
   const [enabled, setEnabled] = useState(false);
   const getData = async () => {
-    const res = await api('/samples', {body: {test: 'test'}, method: 'POST'});
+    const res = await fetch('https://localhost:3000/clientApi/notifications');
     console.log(res);
   };
 

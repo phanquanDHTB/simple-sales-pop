@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Page,
   ResourceList,
@@ -9,6 +9,8 @@ import {
   TextStyle
 } from '@shopify/polaris';
 import NotificationPopup from '../../components/NotificationPopup/NotificationPopup';
+import useFetchApi from '../../hooks/api/useFetchApi';
+import moment from 'moment';
 
 /**
  * /
@@ -23,15 +25,29 @@ export default function Notifications() {
     singular: 'notification',
     plural: 'notifications'
   };
+
+  const {fetchApi, data, loading} = useFetchApi({});
+  console.log(data);
+
+  useEffect(() => {
+    fetchApi('/notifications');
+  }, []);
   const renderItems = item => {
+    const day = moment().diff(item.timeStamp, 'days');
     return (
       <ResourceItem id={item.id} key={item.id}>
         <Stack distribution="equalSpacing">
-          <NotificationPopup />
+          <NotificationPopup
+            firstName={item.firstName}
+            city={item.city}
+            country={item.country}
+            productName={item.productName.join(', ')}
+            timestamp={day === 0 ? 'today' : day === 1 ? 'a day ago' : day + ' days ago'}
+          />
           <TextStyle>
-            From March 8,
+            From {moment(item.timeStamp).format('MMMM DD')},
             <br />
-            2023
+            {moment(item.timeStamp).format('yyyy')}
           </TextStyle>
         </Stack>
       </ResourceItem>
@@ -48,7 +64,7 @@ export default function Notifications() {
           <ResourceList
             selectable
             resourceName={resourceName}
-            items={[{id: 1}, {id: 2}]}
+            items={data}
             renderItem={renderItems}
             selectedItems={selectedItem}
             onSelectionChange={setSelectedItem}
@@ -60,6 +76,7 @@ export default function Notifications() {
             onSortChange={selected => {
               setSortValue(selected);
             }}
+            loading={loading}
           />
         </Layout.Section>
         <Layout.Section>

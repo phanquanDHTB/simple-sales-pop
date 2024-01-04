@@ -6,27 +6,42 @@ const collection = firestore.collection('settings');
 
 /**
  *
- * @param {string} shopID
- * @return
+ * @param {string} shopId
+ * @return {setting | null}
  */
-const getSettingsByShopId = async shopID => {
-  const settings = await collection.where('shopId', '==', shopID).get();
-  if (settings.empty) {
-    return null;
+const getSettingsByShopId = async shopId => {
+  const settings = await collection.doc(shopId).get();
+  if (settings.exists) {
+    return settings.data();
   }
-  return settings.docs[0].data();
+  return null;
 };
 
+/**
+ *
+ * @param {settings} settings
+ * @return {settings | null}
+ */
 const addShopSettings = async settings => {
+  const {shopId} = settings;
+  const oldSettings = await collection.doc(shopId).get();
+  if (oldSettings.exists) {
+    return null;
+  }
   await collection.add(settings);
   return settings;
 };
 
+/**
+ *
+ * @param {settings} settings
+ * @return {settings | null}
+ */
 const changeShopSettings = async settings => {
   const {shopId} = settings;
-  const oldSettings = await collection.doc(shopId);
-  if (oldSettings) {
-    await oldSettings.set(settings);
+  const oldSettings = await collection.doc(shopId).get();
+  if (oldSettings.exists) {
+    await collection.doc(shopId).set(settings);
     return settings;
   }
   return null;
