@@ -10,6 +10,12 @@ export const registerWebhook = async ({
     shopName: shopDomain,
     accessToken
   });
+  const webhookCreateds = (await shopify.webhook.list()).filter(
+    webhookCreated => webhookCreated.topic === webhook
+  );
+  if (webhookCreateds.length) {
+    await shopify.webhook.delete(webhookCreateds[0].id);
+  }
   await shopify.webhook.create({
     topic: webhook,
     address,

@@ -27,7 +27,6 @@ export default function Notifications() {
   };
 
   const {fetchApi, data, loading} = useFetchApi({});
-  console.log(data);
 
   useEffect(() => {
     fetchApi('/notifications');
@@ -41,7 +40,7 @@ export default function Notifications() {
             firstName={item.firstName}
             city={item.city}
             country={item.country}
-            productName={item.productName.join(', ')}
+            productName={item.productName}
             timestamp={day === 0 ? 'today' : day === 1 ? 'a day ago' : day + ' days ago'}
           />
           <TextStyle>

@@ -1,9 +1,9 @@
-import {changeShopSettings, getSettingsByShopId} from '../repositories/settingRepository';
+import * as settingRepository from '../repositories/settingRepository';
 
-const getSettingsController = async ctx => {
+const getSettings = async ctx => {
   try {
     const shopId = ctx.state.user.shopID;
-    const settings = await getSettingsByShopId(shopId);
+    const settings = await settingRepository.getSettingsByShopId(shopId);
     if (settings) {
       return (ctx.body = {
         data: settings,
@@ -22,11 +22,11 @@ const getSettingsController = async ctx => {
   }
 };
 
-const changeSettingsController = async ctx => {
+const updateSettings = async ctx => {
   try {
     const {data} = ctx.req.body;
     const shopId = ctx.state.user.shopID;
-    const newSetting = await changeShopSettings({...data, shopId});
+    const newSetting = await settingRepository.updateSettings({...data, shopId});
     if (newSetting) {
       return (ctx.body = {
         data: newSetting,
@@ -45,4 +45,4 @@ const changeSettingsController = async ctx => {
   }
 };
 
-export {getSettingsController, changeSettingsController};
+export {getSettings, updateSettings};

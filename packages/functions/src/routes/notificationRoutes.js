@@ -5,7 +5,7 @@ import {getApiPrefix} from '@functions/const/app';
 export default function apiRouter(isEmbed = false) {
   const router = new Router({prefix: getApiPrefix(isEmbed)});
 
-  router.get('/notifications', notificationController.getNotificationsController);
+  router.get('/notifications', notificationController.getNotifications);
 
   return router;
 }

@@ -56,7 +56,11 @@ export default function Settings() {
     >
       <Layout>
         <Layout.Section oneThird>
-          {loading ? <SkeletonBodyText /> : <NotificationPopup />}
+          {loading ? (
+            <SkeletonBodyText />
+          ) : (
+            <NotificationPopup truncate={data.truncateProductName} />
+          )}
         </Layout.Section>
         <Layout.Section>
           <Card sectioned>

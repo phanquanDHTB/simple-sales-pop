@@ -40,7 +40,7 @@ const createNotification = async order => {
  * @param {string} shopDomain
  * @return {[notifications] | []}
  */
-const getNotificationByShopDomain = async shopDomain => {
+const getNotificationsByShopDomain = async shopDomain => {
   const notifications = await collection.where('shopDomain', '==', shopDomain).get();
   if (notifications.empty) {
     return [];
@@ -50,4 +50,4 @@ const getNotificationByShopDomain = async shopDomain => {
   });
 };
 
-export {sync30Order, getNotifications, createNotification, getNotificationByShopDomain};
+export {sync30Order, getNotifications, createNotification, getNotificationsByShopDomain};

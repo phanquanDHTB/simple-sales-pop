@@ -25,6 +25,7 @@ const DisplaySettingTab = ({data, handleInputChange}) => {
         <FormLayout.Group>
           <Checkbox
             checked={data.hideTimeAgo}
+            value={data.hideTimeAgo}
             label="Hide time ago"
             onChange={e => handleInputChange('hideTimeAgo', e)}
           />
@@ -33,8 +34,11 @@ const DisplaySettingTab = ({data, handleInputChange}) => {
           <Checkbox
             helpText={`If your productname is long for one line, it will be truncated to 'Product na...'`}
             label="Truncate content text"
+            value={data.truncateProductName}
             checked={data.truncateProductName}
-            onChange={e => handleInputChange('truncateProductName', e)}
+            onChange={e => {
+              handleInputChange('truncateProductName', e);
+            }}
           />
         </FormLayout.Group>
         <FormLayout.Group>

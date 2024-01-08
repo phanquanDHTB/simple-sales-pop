@@ -1,7 +1,7 @@
 import {getShopByShopifyDomain} from '@avada/shopify-auth';
 import {createNotification} from '../repositories/notificationResitory';
 
-const listenNewOrderController = async ctx => {
+const listenNewOrder = async ctx => {
   try {
     const shopifyDomain = ctx.get('X-Shopify-Shop-Domain');
     const orderData = ctx.req.body;
@@ -32,4 +32,4 @@ const listenNewOrderController = async ctx => {
   }
 };
 
-export {listenNewOrderController};
+export {listenNewOrder};
