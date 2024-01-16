@@ -9,14 +9,6 @@ import {Layout, Page, SettingToggle, TextStyle} from '@shopify/polaris';
  */
 export default function Home() {
   const [enabled, setEnabled] = useState(false);
-  const getData = async () => {
-    const res = await fetch('https://localhost:3000/clientApi/notifications');
-    console.log(res);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
   return (
     <Page title="Home" fullWidth>
       <Layout>

@@ -3,7 +3,8 @@ import * as notificationRepository from '../repositories/notificationRepository'
 const getNotifications = async ctx => {
   try {
     const shopId = ctx.state.user.shopID;
-    const notifications = await notificationRepository.getNotifications(shopId);
+    const {sort} = ctx.request.query;
+    const notifications = await notificationRepository.getNotificationsByShopId(shopId, sort);
     return (ctx.body = {
       data: notifications,
       message: 'ok'

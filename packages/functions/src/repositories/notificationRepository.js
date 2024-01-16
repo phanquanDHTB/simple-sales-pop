@@ -17,8 +17,12 @@ const sync30Order = async orders => {
  * @param {string} shopId
  * @return {[notifications] | []}
  */
-const getNotifications = async shopId => {
-  const notifications = await collection.where('shopId', '==', shopId).get();
+const getNotificationsByShopId = async (shopId, sort) => {
+  let db = collection;
+  if (sort) {
+    db = collection.orderBy('timeStamp', sort);
+  }
+  const notifications = await db.where('shopId', '==', shopId).get();
   if (notifications.empty) {
     return [];
   }
@@ -50,4 +54,4 @@ const getNotificationsByShopDomain = async shopDomain => {
   });
 };
 
-export {sync30Order, getNotifications, createNotification, getNotificationsByShopDomain};
+export {sync30Order, getNotificationsByShopId, createNotification, getNotificationsByShopDomain};

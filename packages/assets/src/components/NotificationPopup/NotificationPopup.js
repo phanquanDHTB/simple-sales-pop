@@ -5,6 +5,7 @@ import {Icon} from '@shopify/polaris';
 import './NoticationPopup.scss';
 
 const NotificationPopup = ({
+  hideTimeAgo = false,
   truncate = false,
   firstName = 'John Doe',
   city = 'New York',
@@ -32,7 +33,7 @@ const NotificationPopup = ({
                 Purchased {productName}
               </div>
               <div className={'Avada-SP__Footer'}>
-                {timestamp}
+                {!hideTimeAgo && timestamp}
                 <div className="uni-blue">
                   <Icon color="primary" source={TickSmallMinor} />
                   <span>by Avada</span>
@@ -53,7 +54,8 @@ NotificationPopup.propTypes = {
   productName: PropsTypes.string,
   timestamp: PropsTypes.string,
   productImage: PropsTypes.string,
-  truncate: PropsTypes.bool
+  truncate: PropsTypes.bool,
+  hideTimeAgo: PropsTypes.bool
 };
 
 export default NotificationPopup;

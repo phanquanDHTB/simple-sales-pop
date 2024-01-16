@@ -2,7 +2,7 @@
 
 name = "avada"
 client_id = "2a2177a38fd3d85646897dbb46ca72f1"
-application_url = "https://adware-decline-switch-muscles.trycloudflare.com/auth/shopify"
+application_url = "https://prostores-rotary-alternative-yang.trycloudflare.com/auth/shopify"
 embedded = true
 
 [access_scopes]
@@ -11,9 +11,9 @@ scopes = ""
 
 [auth]
 redirect_urls = [
-  "https://adware-decline-switch-muscles.trycloudflare.com/auth/shopify/callback",
-  "https://adware-decline-switch-muscles.trycloudflare.com/authSa/shopify/callback",
-  "https://adware-decline-switch-muscles.trycloudflare.com/auth/shopify/embed/callback",
+  "https://prostores-rotary-alternative-yang.trycloudflare.com/auth/shopify/callback",
+  "https://prostores-rotary-alternative-yang.trycloudflare.com/authSa/shopify/callback",
+  "https://prostores-rotary-alternative-yang.trycloudflare.com/auth/shopify/embed/callback",
   "https://localhost:3000/auth/shopify/callback",
   "https://localhost:3000/authSa/shopify/callback",
   "https://localhost:3000/auth/shopify/embed/callback"

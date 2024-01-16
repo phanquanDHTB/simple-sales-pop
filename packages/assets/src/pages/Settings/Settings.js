@@ -57,9 +57,9 @@ export default function Settings() {
       <Layout>
         <Layout.Section oneThird>
           {loading ? (
-            <SkeletonBodyText />
+            <SkeletonBodyText lines={5} />
           ) : (
-            <NotificationPopup truncate={data.truncateProductName} />
+            <NotificationPopup truncate={data.truncateProductName} hideTimeAgo={data.hideTimeAgo} />
           )}
         </Layout.Section>
         <Layout.Section>

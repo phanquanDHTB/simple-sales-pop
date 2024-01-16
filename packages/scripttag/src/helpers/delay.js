@@ -1,7 +1,12 @@
-export const delay = time => {
+/**
+ *
+ * @param {number} second
+ * @return {Promise}
+ */
+export const delay = second => {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve();
-    }, time * 1000);
+    }, second * 1000);
   });
 };

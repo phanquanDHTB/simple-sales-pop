@@ -9,9 +9,7 @@ import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
 import {addSettings} from '../repositories/settingRepository';
 import {defaultSettings} from '../const/app';
-import syncOrderafterInstall from '../services/syncOrderAfterInstall';
-import {registerWebhook} from '../services/registerWebhook';
-import {registerScripttag} from '../services/registerScripttag';
+import {registerWebhook, syncOrderAfterInstall} from '../services/shopifyServices';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -53,13 +51,12 @@ app.use(
         const {id, accessToken} = await getShopByShopifyDomain(shopDomain);
         await Promise.all([
           addSettings({...defaultSettings, shopId: id, shopDomain}),
-          syncOrderafterInstall({
+          syncOrderAfterInstall({
             accessToken,
             shopId: id,
             shopDomain
           }),
-          registerWebhook({shopDomain, accessToken, address: ''}),
-          registerScripttag({shopDomain, accessToken})
+          registerWebhook({shopDomain, accessToken, address: ''})
         ]);
       } catch (err) {
         console.log('xxx', err);

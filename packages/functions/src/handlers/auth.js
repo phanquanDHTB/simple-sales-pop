@@ -7,6 +7,8 @@ import path from 'path';
 import createErrorHandler from '@functions/middleware/errorHandler';
 import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
+import {addSettings} from '../repositories/settingRepository';
+import {registerWebhook, syncOrderAfterInstall} from '../services/shopifyServices';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -43,7 +45,23 @@ app.use(
     },
     hostName: appConfig.baseUrl,
     isEmbeddedApp: true,
-    afterInstall: async ctx => {},
+    afterInstall: async ctx => {
+      const shopDomain = ctx?.state?.shopify?.shop;
+      try {
+        const {id, accessToken} = await getShopByShopifyDomain(shopDomain);
+        await Promise.all([
+          addSettings({...defaultSettings, shopId: id, shopDomain}),
+          syncOrderAfterInstall({
+            accessToken,
+            shopId: id,
+            shopDomain
+          }),
+          registerWebhook({shopDomain, accessToken, address: ''})
+        ]);
+      } catch (err) {
+        console.log('xxx', err);
+      }
+    },
     afterThemePublish: ctx => {
       // Publish assets when theme is published or changed here
       return (ctx.body = {

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Select, TextField, FormLayout, Card} from '@shopify/polaris';
+import {Select, FormLayout, Card} from '@shopify/polaris';
+import TextFieldCustom from '../../components/TextField/TextField';
 
 /**
  *
@@ -25,7 +26,7 @@ const TringgerSettingTab = ({data, handleInputChange}) => {
           onChange={e => handleInputChange('allowShow', e)}
         />
         {data.allowShow === 'specific' && (
-          <TextField
+          <TextFieldCustom
             inputMode="url"
             label="Included pages"
             helpText="Pages URLs to show the pop-up (separated by new lines)"
@@ -34,7 +35,7 @@ const TringgerSettingTab = ({data, handleInputChange}) => {
             multiline
           />
         )}
-        <TextField
+        <TextFieldCustom
           label="Excluded pages"
           helpText="Pages URLs NOT to show the pop-up (separated by new lines)"
           value={data.excludedUrls}

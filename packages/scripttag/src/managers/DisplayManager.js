@@ -16,13 +16,6 @@ export default class DisplayManager {
 
     await delay(this.settings.firstDelay);
 
-    const containers = document.getElementsByClassName('Avada-SalePop__OuterWrapper');
-    if (containers.length > 1) {
-      const containersArray = Array.from(containers);
-      const removeContainer = containersArray[1];
-      removeContainer.parentNode.removeChild(removeContainer);
-    }
-
     for (const notification of notifications) {
       await this.displayPopup(notification);
     }
@@ -30,8 +23,6 @@ export default class DisplayManager {
 
   async displayPopup(notification) {
     this.display({notification});
-    const popup = document.getElementsByClassName('Avava-SP__Wrapper')[0];
-    popup.classList.add(`Avada-Sp__Wrapper--${this.settings.positions}`);
     await delay(this.settings.displayDuration);
     this.fadeOut();
     await delay(this.settings.popsInterval - this.settings.displayDuration);
@@ -49,6 +40,7 @@ export default class DisplayManager {
         {...notification}
         relativeDate={notification.timeStamp}
         truncate={this.settings.truncateProductName}
+        position={this.settings.positions}
       />,
       container
     );

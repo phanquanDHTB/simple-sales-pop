@@ -1,5 +1,6 @@
-import {getNotificationsByShopDomain} from '../repositories/notificationResitory';
+import {getNotificationsByShopDomain} from '../repositories/notificationRepository';
 import {getSettingsByShopDomain} from '../repositories/settingRepository';
+import moment from 'moment';
 
 const getClientApi = async ctx => {
   try {
@@ -8,10 +9,10 @@ const getClientApi = async ctx => {
       getNotificationsByShopDomain(shopDomain),
       getSettingsByShopDomain(shopDomain)
     ]);
-    const notificationsAfterFormat = notifications.map(notification => {
+    const notificationsAfterFormatDate = notifications?.map(notification => {
       const day = moment().diff(notification.timeStamp, 'days');
       let relativeDate;
-      if (notification.hideTimeAgo) {
+      if (!notification.hideTimeAgo) {
         relativeDate = day === 0 ? 'today' : day === 1 ? 'a day ago' : day + ' days ago';
       } else {
         relativeDate = '';
@@ -23,7 +24,7 @@ const getClientApi = async ctx => {
     });
 
     return (ctx.body = {
-      notifications: notificationsAfterFormat,
+      notifications: notificationsAfterFormatDate,
       settings
     });
   } catch (err) {

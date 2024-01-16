@@ -1,7 +1,7 @@
 import {Card, Checkbox, FormLayout, TextStyle} from '@shopify/polaris';
 import React from 'react';
 import DesktopPositionInput from '../../components/DesktopPositionInput/DesktopPositionInput';
-import RangeSliderCustom from '../../components/RangeSlider';
+import RangeSliderCustom from '../../components/RangeSlider/RangeSlider';
 
 /**
  *

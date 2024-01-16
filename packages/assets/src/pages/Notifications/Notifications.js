@@ -11,6 +11,7 @@ import {
 import NotificationPopup from '../../components/NotificationPopup/NotificationPopup';
 import useFetchApi from '../../hooks/api/useFetchApi';
 import moment from 'moment';
+import PageLoadingSkeleton from '../../components/PageLoadingSkeleton/PageLoadingSkeleton';
 
 /**
  * /
@@ -28,9 +29,14 @@ export default function Notifications() {
 
   const {fetchApi, data, loading} = useFetchApi({});
 
+  // useEffect(() => {
+  //   fetchApi('/notifications');
+  // }, []);
+
   useEffect(() => {
-    fetchApi('/notifications');
-  }, []);
+    fetchApi(`/notifications?sort=${sortValue}`);
+  }, [sortValue]);
+
   const renderItems = item => {
     const day = moment().diff(item.timeStamp, 'days');
     return (
@@ -42,6 +48,7 @@ export default function Notifications() {
             country={item.country}
             productName={item.productName}
             timestamp={day === 0 ? 'today' : day === 1 ? 'a day ago' : day + ' days ago'}
+            productImage={item.productImage}
           />
           <TextStyle>
             From {moment(item.timeStamp).format('MMMM DD')},
@@ -60,23 +67,26 @@ export default function Notifications() {
     >
       <Layout sectioned>
         <Layout.Section>
-          <ResourceList
-            selectable
-            resourceName={resourceName}
-            items={data}
-            renderItem={renderItems}
-            selectedItems={selectedItem}
-            onSelectionChange={setSelectedItem}
-            sortValue={sortValue}
-            sortOptions={[
-              {label: 'Newest update', value: 'desc'},
-              {label: 'Oldest update', value: 'asc'}
-            ]}
-            onSortChange={selected => {
-              setSortValue(selected);
-            }}
-            loading={loading}
-          />
+          {loading ? (
+            <PageLoadingSkeleton />
+          ) : (
+            <ResourceList
+              selectable
+              resourceName={resourceName}
+              items={data}
+              renderItem={renderItems}
+              selectedItems={selectedItem}
+              onSelectionChange={setSelectedItem}
+              sortValue={sortValue}
+              sortOptions={[
+                {label: 'Newest update', value: 'desc'},
+                {label: 'Oldest update', value: 'asc'}
+              ]}
+              onSortChange={selected => {
+                setSortValue(selected);
+              }}
+            />
+          )}
         </Layout.Section>
         <Layout.Section>
           <Stack distribution="center">
