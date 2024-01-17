@@ -2,7 +2,7 @@ import {getNotificationsByShopDomain} from '../repositories/notificationReposito
 import {getSettingsByShopDomain} from '../repositories/settingRepository';
 import moment from 'moment';
 
-const getClientApi = async ctx => {
+const getNotificationsAndSettings = async ctx => {
   try {
     const {shopDomain} = ctx.request.query;
     const [notifications, settings] = await Promise.all([
@@ -35,4 +35,4 @@ const getClientApi = async ctx => {
   }
 };
 
-export {getClientApi};
+export {getNotificationsAndSettings};

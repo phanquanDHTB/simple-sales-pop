@@ -1,10 +1,10 @@
 import Router from 'koa-router';
-import {getClientApi} from '../controllers/clientApiController';
+import {getNotificationsAndSettings} from '../controllers/clientApiController';
 
 const router = new Router({
   prefix: '/clientApi'
 });
 
-router.get('/notifications', getClientApi);
+router.get('/notifications', getNotificationsAndSettings);
 
 export default router;

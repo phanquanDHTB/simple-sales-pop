@@ -27,7 +27,6 @@ export default function Settings() {
     {
       id: 0,
       content: 'Display',
-      accessibilityLabel: 'All customers',
       children: <DisplaySettingTab data={data} handleInputChange={handleInputChange} />
     },
     {

@@ -124,7 +124,7 @@ export const syncOrderAfterInstall = async ({shopDomain, accessToken, shopId}) =
     accessToken: accessToken
   });
 
-  const query = `{
+  const query = `query {
     orders(first: 30) {
       edges {
         node {

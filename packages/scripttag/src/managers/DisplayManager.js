@@ -9,13 +9,11 @@ export default class DisplayManager {
     this.notifications = [];
     this.settings = {};
   }
+
   async initialize({notifications, settings}) {
-    this.notifications = notifications.slice(0, settings.maxPopsDisplay);
     this.settings = settings;
     this.insertContainer();
-
     await delay(this.settings.firstDelay);
-
     for (const notification of notifications) {
       await this.displayPopup(notification);
     }
@@ -38,7 +36,7 @@ export default class DisplayManager {
     render(
       <NotificationPopup
         {...notification}
-        relativeDate={notification.timeStamp}
+        relativeDate={this.settings.hideTimeAgo ? '' : notification.timeStamp}
         truncate={this.settings.truncateProductName}
         position={this.settings.positions}
       />,

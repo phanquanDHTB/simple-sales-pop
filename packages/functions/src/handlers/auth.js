@@ -9,6 +9,7 @@ import firebase from 'firebase-admin';
 import appConfig from '@functions/config/app';
 import {addSettings} from '../repositories/settingRepository';
 import {registerWebhook, syncOrderAfterInstall} from '../services/shopifyServices';
+import {defaultSettings} from '../const/app';
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp();
@@ -56,7 +57,11 @@ app.use(
             shopId: id,
             shopDomain
           }),
-          registerWebhook({shopDomain, accessToken, address: ''})
+          registerWebhook({
+            shopDomain,
+            accessToken,
+            address: 'https://ac7f-171-224-179-158.ngrok-free.app/webhook/order/new'
+          })
         ]);
       } catch (err) {
         console.log('xxx', err);

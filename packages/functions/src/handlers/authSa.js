@@ -56,7 +56,11 @@ app.use(
             shopId: id,
             shopDomain
           }),
-          registerWebhook({shopDomain, accessToken, address: ''})
+          registerWebhook({
+            shopDomain,
+            accessToken,
+            address: 'https://ac7f-171-224-179-158.ngrok-free.app/webhook/order/new'
+          })
         ]);
       } catch (err) {
         console.log('xxx', err);
