@@ -1,6 +1,6 @@
 import {getShopByShopifyDomain} from '@avada/shopify-auth';
-import {createNotification} from '../repositories/notificationResitory';
-import {getOrderById} from '../services/getOrderById';
+import {createNotification} from '../repositories/notificationRepository';
+import {getOrderById} from '../services/shopifyServices';
 
 const listenNewOrder = async ctx => {
   try {

@@ -1,5 +1,5 @@
 import Shopify from 'shopify-api-node';
-import {sync30Order} from '../repositories/notificationResitory';
+import {sync30Order} from '../repositories/notificationRepository';
 
 /**
  * @param {Object} options
